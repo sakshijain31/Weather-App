@@ -7,7 +7,6 @@ const weatherStackCode = require('./utils/weatherstack.js')
 const app = express()
 // this port is required to deploy in prod
 const port = process.env.PORT || 3000
-console.log(port);
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
@@ -88,5 +87,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('Server is up on port 3000.')
+    console.log('Server is up on port.' + port)
 })
