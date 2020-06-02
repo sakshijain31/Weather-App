@@ -5,10 +5,12 @@ const geoCode = require('./utils/geocode.js')
 const weatherStackCode = require('./utils/weatherstack.js')
 
 const app = express()
+// this port is required to deploy in prod
+const port = process.env.PORT || 3000
+console.log(port);
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
-console.log(publicDirectoryPath)
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
@@ -85,6 +87,6 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server is up on port 3000.')
 })
