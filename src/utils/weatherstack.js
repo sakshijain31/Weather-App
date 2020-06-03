@@ -6,13 +6,16 @@ const weatherStackUrl = 'http://api.weatherstack.com/current?access_key=e19592d4
 
 const weatherStackCode = ({latitude, longitude}, callback) => {
     const weatherStackUrl = 'http://api.weatherstack.com/current?access_key=' + wetherstack_access_token + '&query='+ latitude + ',' + longitude
-    request({ uri: weatherStackUrl, json: true }, (error, response) => {
+    request({ uri: weatherStackUrl, json: true }, (error, {body}) => {
         if (error) {
             callback('Server down',undefined)
-        } else if (response.body.error) {
+        } else if (body.error) {
             callback('Unable to find location',undefined)
         } else {
-            callback(undefined, 'It is currently ' + response.body.current.temperature + ' degress out. There is a ' + response.body.current.feelslike + '% chance of rain.')
+            console.log(body)
+            callback(undefined, body.current.weather_descriptions[0] + ' and the observation time is ' + body.current.observation_time + ' ' + body.location.timezone_id + '. It is currently ' + body.current.temperature + " degree's out.  Humidity is "
+            +  body.current.humidity + " and there is " + body.current.feelslike + "% chances of rain." + ' Is it day time there - ' + body.current.is_day + '.'
+            )
         }
 
     })

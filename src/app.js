@@ -46,7 +46,7 @@ app.get('/help', (req, res) => {
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
-            Error: ' Search query is missing in Query String'
+            error: ' Search query is missing in Query String'
         })
     }
     const address = req.query.address

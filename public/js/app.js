@@ -5,13 +5,14 @@ const msgTwo = document.querySelector('#msg-2')
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    
+
     msgOne.textContent = 'Loading.....'
     msgTwo.textContent = ''
-    fetch('/weather?address='+ search.value).then((resp) =>{
-        resp.json().then((data=>{
-            if(data.error){
+    fetch('/weather?address=' + search.value).then((resp) => {
+        resp.json().then((data => {
+            if (data.error) {
                 msgOne.textContent = data.error
+                return false
             }
             search.value = ''
             msgOne.textContent = data.location
